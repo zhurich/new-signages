@@ -1,0 +1,16 @@
+@import "reset";
+
+@font-face {
+	font-family: 'AliveFont';
+  src: url('../../assets/fonts/CoreSansA45Regular.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+#root {
+	font-family: 'AliveFont', sans-serif;
+}
+
+button {
+	border-radius: 20px;
+}
