@@ -1,46 +1,30 @@
-import React, { useState, FC } from "react";
+import React, { useState, FC, useEffect, useMemo } from "react";
 import block from "bem-cn";
 // import { Container, MainLayout } from "components";
 // import { MainLayout, Container } from "@components";
 import { MainLayout, Container } from "../../components";
+import { ALL_SIGNS, CATEGORIES } from "./constants";
 import "./RoadSignsRegistryPage.scss";
 
 const b = block("road-signs-registry");
 
 export const RoadSignsRegistryPage: FC = () => {
-  const [selectedCategory, setSelectedCategory] =
-    useState<string>("Предупреждающие");
+  const [selectedCategory, setSelectedCategory] = useState("warning");
   const [selectedSign, setSelectedSign] = useState<string | null>(null);
+  const [searchInput, setSearchInput] = useState("");
 
-  const categories = [
-    "Предупреждающие",
-    "Приоритета",
-    "Запрещающие",
-    "Предписывающие",
-    "Особых предписаний",
-    "Информационные",
-    "Сервиса",
-    "Дополнительной информации",
-  ];
+  const ALL_SIGNS_ARRAY = useMemo(
+    () => Object.values(ALL_SIGNS)?.flat(),
+    [ALL_SIGNS]
+  );
 
-  const signs = [
-    {
-      id: "1.1",
-      name: "Железнодорожный переезд со шлагбаумом",
-      category: "Предупреждающие",
-    },
-    {
-      id: "1.2",
-      name: "Железнодорожный переезд без шлагбаума",
-      category: "Предупреждающие",
-    },
-    // Add more signs as needed
-  ];
   return (
     <MainLayout title="Дорожные знаки">
       <div className={b("search-wrapper")}>
         <input
           type="text"
+          value={searchInput}
+          onChange={(e) => setSearchInput(e.target.value)}
           placeholder="Искать знаки по номеру или названию..."
           className={b("search-input")}
         />
@@ -49,15 +33,15 @@ export const RoadSignsRegistryPage: FC = () => {
         <div className={b("content")}>
           <aside className={b("sidebar")}>
             <div className={b("categories")}>
-              {categories.map((category) => (
+              {CATEGORIES.map((category) => (
                 <button
-                  key={category}
+                  key={category?.key}
                   className={b("category-button", {
-                    active: selectedCategory === category,
+                    active: selectedCategory === category?.key,
                   })}
-                  onClick={() => setSelectedCategory(category)}
+                  onClick={() => setSelectedCategory(category?.key)}
                 >
-                  {category}
+                  {category?.title}
                 </button>
               ))}
             </div>
@@ -65,21 +49,26 @@ export const RoadSignsRegistryPage: FC = () => {
           <main className={b("main-content")}>
             <table className={b("signs-table")}>
               <tbody>
-                {signs
-                  .filter((sign) => sign.category === selectedCategory)
-                  .map((sign) => (
-                    <tr
-                      key={sign.id}
-                      className={b("sign-row", {
-                        active: selectedSign === sign.id,
-                      })}
-                      onClick={() => setSelectedSign(sign.id)}
-                    >
-                      <td className={b("sign-icon")}>🚩</td>
-                      <td className={b("sign-id")}>{sign.id}</td>
-                      <td className={b("sign-name")}>{sign.name}</td>
-                    </tr>
-                  ))}
+                {(searchInput?.length > 0
+                  ? ALL_SIGNS_ARRAY?.filter((signItem) =>
+                      signItem?.title
+                        ?.toLowerCase()
+                        ?.includes(searchInput.toLowerCase())
+                    )
+                  : ALL_SIGNS?.[selectedCategory]
+                )?.map((sign) => (
+                  <tr
+                    key={sign?.code}
+                    className={b("sign-row", {
+                      active: selectedSign === sign?.code,
+                    })}
+                    onClick={() => setSelectedSign(sign?.code)}
+                  >
+                    <td className={b("sign-icon")}>🚩</td>
+                    <td className={b("sign-id")}>{sign?.code}</td>
+                    <td className={b("sign-name")}>{sign?.title}</td>
+                  </tr>
+                ))}
               </tbody>
             </table>
           </main>

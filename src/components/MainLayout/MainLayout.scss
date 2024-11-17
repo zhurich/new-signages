@@ -1,0 +1,24 @@
+.main-layout {
+  &__page-buttons {
+		margin-top: 24px;
+    display: flex;
+    flex-direction: row;
+		justify-content: center;
+    gap: 10px;
+    width: 100%;
+  }
+
+  &__page-button {
+    padding: 10px;
+    background-color: #0072c6;
+    color: white;
+    border: none;
+		width: 200px;
+    cursor: pointer;
+    font-size: 14px;
+
+    &:hover {
+      background-color: #005a9e;
+    }
+  }
+}
