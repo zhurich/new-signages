@@ -2,30 +2,23 @@ import { createSlice } from '@reduxjs/toolkit';
 
 // Начальное значение
 const initialState = {
-  value: 0,
+  pointerKey: 'preliminary',
 };
 
-const counterSlice = createSlice({
-  name: 'counter',
+const pointerConstructorSlice = createSlice({
+  name: 'pointerConstructor',
   initialState,
   // Редьюсеры в слайсах меняют состояние и ничего не возвращают
   reducers: {
-    increment: (state) => {
-      state.value += 1;
-    },
-    decrement: (state) => {
-      state.value -= 1;
-    },
-    // Пример с данными
-    incrementByAmount: (state, action) => {
-      state.value += action.payload;
+    setPointerKey: (state, action) => {
+      state.pointerKey = action.payload;
     },
   },
 });
 
 // Слайс генерирует действия, которые экспортируются отдельно
 // Действия генерируются автоматически из имен ключей редьюсеров
-export const { increment, decrement, incrementByAmount } = counterSlice.actions;
+export const { setPointerKey } = pointerConstructorSlice.actions;
 
 // По умолчанию экспортируется редьюсер, сгенерированный слайсом
-export default counterSlice.reducer;
+export default pointerConstructorSlice.reducer;

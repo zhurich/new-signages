@@ -1,6 +1,9 @@
-import React, { useState, FC, useEffect, useMemo } from "react";
+import React, { useState, FC } from "react";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, UseDispatch } from "react-redux";
 import block from "bem-cn";
 import { MainLayout, Container } from "../../components";
+import { setPointerKey } from "../../slices/pointerConstructorSlice";
 import preliminaryIcon from "../../assets/icons/preliminary.jpg";
 import directionSignIcon from "../../assets/icons/direction_sign.jpg";
 import directionPointerIcon from "../../assets/icons/direction_pointer.jpg";
@@ -13,6 +16,8 @@ import "./PointersRegistryPage.scss";
 const b = block("pointers-registry");
 
 export const PointersRegistryPage: FC = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [selectedPointerItem, setSelectedPointerItem] = useState<string>();
 
   const pointers = [
@@ -60,7 +65,14 @@ export const PointersRegistryPage: FC = () => {
               </div>
             ))}
           </div>
-          <button className={b("pointers-button")}>
+          <button
+            className={b("pointers-button")}
+						disabled={!selectedPointerItem}
+            onClick={() => {
+              dispatch(setPointerKey(selectedPointerItem));
+              navigate("/constructor");
+            }}
+          >
             Перейти к конструктору
           </button>
         </div>

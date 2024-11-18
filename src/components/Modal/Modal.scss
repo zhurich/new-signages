@@ -1,0 +1,47 @@
+.modal {
+  border-radius: var(--modal-border-radius);
+  box-shadow: 0 1px 10px 0 rgba(28, 52, 80, 0.1),
+    0 0 4px 0 rgba(28, 52, 80, 0.1);
+  padding: var(--modal-padding);
+	font-family: 'AliveFont';
+
+  &__root {
+    z-index: 50 !important;
+  }
+
+  &__header {
+    font-size: var(--modal-title-fz);
+    font-weight: 700;
+    margin-right: 1.5rem;
+
+    &_compact {
+      font-size: var(--modal-title-fz-compact);
+    }
+  }
+
+  &__close {
+    outline: none;
+    top: 28px !important;
+    right: 20px !important;
+    transition: opacity ease-in-out 100ms;
+
+    &:hover {
+      opacity: 0.8;
+    }
+
+    &_compact-header {
+      top: 25px !important;
+    }
+  }
+
+  &__content {
+    margin-top: 16px;
+  }
+
+  &__footer {
+    display: flex;
+    justify-content: right;
+    gap: 0.5rem;
+    margin-top: 16px;
+  }
+}
