@@ -1,17 +1,53 @@
 .pointer-constructor {
-  &__add-object-button {
-		margin-top: 24px;
-		padding: 0 20px;
-    height: 40px;
-    font-size: 20px;
-		background-color: #0072c6;
-    color: white;
-    border: none;
-		cursor: pointer;
+  &__content {
+    display: flex;
+    flex-direction: column;
+  }
 
-		&:hover {
-			background-color: #005a9e;
-			transition: all .3s linear;
-		}
+  &__buttons-wrapper {
+    display: flex;
+    gap: 16px;
+    align-self: end;
+  }
+
+  &__constructor {
+    display: flex;
+    flex-direction: row;
+    margin-top: 24px;
+  }
+
+  &__param-title {
+    font-size: 24px;
+  }
+
+  &__params-title,
+  &__legend-title {
+    margin-bottom: 12px;
+  }
+
+  &__legend {
+    margin-top: 24px;
+  }
+
+	&__param-item {
+		margin-top: 12px;
+		display: flex;
+		align-items: center;
+	}
+
+  &__param-value {
+    > input {
+      height: 40px;
+      width: 400px;
+      font-size: 24px;
+      border-radius: 16px;
+			margin-right: 8px;
+      padding-left: 12px;
+      border: 1px solid black;
+    }
+  }
+
+	&__param-delete {
+		cursor: pointer;
 	}
 }

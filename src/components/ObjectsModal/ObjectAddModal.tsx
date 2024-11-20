@@ -1,6 +1,8 @@
 import React, { useState, FC, useEffect, useMemo } from "react";
+import { v4 as uuid } from "uuid";
 import block from "bem-cn";
 import Modal from "../Modal/Modal";
+import { Button } from "../";
 import "./ObjectAddModal.scss";
 
 const b = block("object-add-modal");
@@ -75,6 +77,7 @@ export const ObjectAddModal = ({
       //  icon: routeNumberIcon
     },
   ];
+
   return (
     <Modal
       className={b()}
@@ -98,14 +101,13 @@ export const ObjectAddModal = ({
         ))}
       </div>
       <div className={b("button-wrapper")}>
-        <button
-          className={b("add-button")}
+        <Button
           onClick={() => {
             setObjects([
               ...objects,
               {
                 type: selectedObjItem?.type,
-                id: `${selectedObjItem?.type}-${objects.length}`,
+                id: `${selectedObjItem?.type}-${uuid()}`,
                 x: 100,
                 y: 100,
                 text: "Улица Берзарина",
@@ -116,7 +118,7 @@ export const ObjectAddModal = ({
           }}
         >
           Добавить
-        </button>
+        </Button>
       </div>
     </Modal>
   );
