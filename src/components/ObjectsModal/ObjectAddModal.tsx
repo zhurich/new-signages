@@ -3,6 +3,7 @@ import { v4 as uuid } from "uuid";
 import block from "bem-cn";
 import Modal from "../Modal/Modal";
 import { Button } from "../";
+import { SVG_OBJECTS_DATA } from "./constants";
 import "./ObjectAddModal.scss";
 
 const b = block("object-add-modal");
@@ -17,25 +18,25 @@ export const ObjectAddModal = ({
 
   const objectsList = [
     {
-      type: "arrow",
-      key: "arrow-long",
+      type: "arrow-l",
+      key: "arrow-l",
       title: "Стрелка длинная",
       // icon: preliminaryIcon,
     },
     {
-      type: "arrow",
-      key: "arrow-middle",
+      type: "arrow-m",
+      key: "arrow-m",
       title: "Стрелка средняя",
       // icon: directionSignIcon,
     },
     {
-      type: "arrow",
+      type: "arrow-s",
       key: "arrow-short",
       title: "Стрелка короткая",
       // icon: directionPointerIcon,
     },
     {
-      type: "arrow",
+      type: "arrow-curved-right",
       key: "arrow-curved-right",
       title: "Стрелка изогнутая вправо",
       // icon: objectNameIcon,
@@ -44,13 +45,8 @@ export const ObjectAddModal = ({
       type: "arrow",
       key: "arrow-curved-right-long",
       title: "Стрелка изогнутая вправо длинная",
+      disabled: true,
       // icon: distancePointerIcon,
-    },
-    {
-      type: "text",
-      key: "text-white",
-      title: "Текст белый",
-      // icon: kmSignIcon
     },
     {
       type: "text",
@@ -62,18 +58,21 @@ export const ObjectAddModal = ({
       type: "pic",
       key: "pic-1",
       title: "Пиктограмма 1",
+      disabled: true,
       //  icon: routeNumberIcon
     },
     {
       type: "pic",
       key: "pic-2",
       title: "Пиктограмма 2",
+      disabled: true,
       // icon: routeNumberIcon
     },
     {
       type: "pic",
       key: "pic-3",
       title: "Пиктограмма 3",
+      disabled: true,
       //  icon: routeNumberIcon
     },
   ];
@@ -90,6 +89,7 @@ export const ObjectAddModal = ({
           <div
             className={b("object-item", {
               active: selectedObjItem?.key === obj?.key,
+              disabled: obj?.disabled,
             })}
             onClick={() => setSelectedObjItem(obj)}
           >
@@ -103,17 +103,57 @@ export const ObjectAddModal = ({
       <div className={b("button-wrapper")}>
         <Button
           onClick={() => {
-            setObjects([
-              ...objects,
-              {
-                type: selectedObjItem?.type,
-                id: `${selectedObjItem?.type}-${uuid()}`,
-                x: 100,
-                y: 100,
+            let newObject: any = {
+              type: selectedObjItem?.type,
+              id: `${selectedObjItem?.type}-${uuid()}`,
+            };
+            if (selectedObjItem?.type === "text") {
+              newObject = {
+                ...newObject,
                 text: "Улица Берзарина",
                 color: "black",
-              },
-            ]);
+                fontSize: 32,
+                x: 100,
+                y: 100,
+              };
+            } else if (selectedObjItem?.type === "arrow-s") {
+              newObject = {
+                ...newObject,
+                data: SVG_OBJECTS_DATA?.[selectedObjItem?.type],
+                color: "black",
+                title: "Стрелка маленькая",
+                x: 300,
+                y: 200,
+              };
+            } else if (selectedObjItem?.type === "arrow-m") {
+              newObject = {
+                ...newObject,
+                data: SVG_OBJECTS_DATA?.[selectedObjItem?.type],
+                color: "black",
+                title: "Стрелка средняя",
+                x: 300,
+                y: 300,
+              };
+            } else if (selectedObjItem?.type === "arrow-l") {
+              newObject = {
+                ...newObject,
+                data: SVG_OBJECTS_DATA?.[selectedObjItem?.type],
+                color: "black",
+                title: "Стрелка длинная",
+                x: 300,
+                y: 400,
+              };
+            } else if (selectedObjItem?.type === "arrow-curved-right") {
+              newObject = {
+                ...newObject,
+                data: SVG_OBJECTS_DATA?.[selectedObjItem?.type],
+                color: "black",
+                title: "Стрелка изогнутая вправо",
+                x: 300,
+                y: 200,
+              };
+            }
+            setObjects((state: any) => [...state, newObject]);
             setOpen(false);
           }}
         >

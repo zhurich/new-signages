@@ -17,6 +17,7 @@
   }
 
   &__param-title {
+    margin-right: 8px;
     font-size: 24px;
   }
 
@@ -29,25 +30,42 @@
     margin-top: 24px;
   }
 
-	&__param-item {
-		margin-top: 12px;
-		display: flex;
-		align-items: center;
-	}
+  &__param-item {
+    margin-top: 12px;
+    display: flex;
+    align-items: center;
+  }
 
   &__param-value {
-    > input {
+		display: flex;
+		align-items: center;
+    font-size: 24px;
+    > input[type="text"] {
       height: 40px;
-      width: 400px;
-      font-size: 24px;
       border-radius: 16px;
-			margin-right: 8px;
+      margin-right: 8px;
       padding-left: 12px;
       border: 1px solid black;
     }
+    &-text {
+      width: 400px;
+    }
+    &-size {
+      width: 80px;
+    }
+    &-title,
+    &-color {
+      margin-left: 8px;
+    }
+		&-title {
+			margin-right: 8px;
+		}
+    &-fz {
+      width: 80px;
+    }
   }
 
-	&__param-delete {
-		cursor: pointer;
-	}
+  &__param-delete {
+    cursor: pointer;
+  }
 }

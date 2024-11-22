@@ -27,6 +27,9 @@
       background-color: #0072c6;
       color: white;
     }
+		&_disabled {
+			background-color: #ffc4c4;
+		}
   }
 
 	&__object-icon {
