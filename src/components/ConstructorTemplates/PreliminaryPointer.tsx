@@ -5,7 +5,7 @@ import { Stage, Layer, Text, Rect, Path } from "react-konva";
 const b = block("pointer-constructor");
 
 export const PreliminaryPointer = (pointerParams: any) => {
-  const { height, width, bgColor, objects, setObjects } = pointerParams;
+  const { height, width, bgColor, objects, setObjects, stageRef } = pointerParams;
 
   const renderObjects = () => {
     return objects.map((obj: any) => {
@@ -63,7 +63,7 @@ export const PreliminaryPointer = (pointerParams: any) => {
   return (
     <div>
       {/* Stage для рисования объектов */}
-      <Stage width={1000} height={500}>
+      <Stage width={width*1.25} height={height*1.25} ref={stageRef}>
         <Layer>
           <Rect
             x={50}

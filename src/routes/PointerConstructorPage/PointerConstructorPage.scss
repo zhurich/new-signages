@@ -16,6 +16,15 @@
     margin-top: 24px;
   }
 
+  &__constructor-canvas {
+    width: 1000px;
+  }
+
+  &__visual-buttons {
+    display: flex;
+    flex-direction: row;
+  }
+
   &__param-title {
     margin-right: 8px;
     font-size: 24px;
@@ -37,8 +46,8 @@
   }
 
   &__param-value {
-		display: flex;
-		align-items: center;
+    display: flex;
+    align-items: center;
     font-size: 24px;
     > input[type="text"] {
       height: 40px;
@@ -57,9 +66,9 @@
     &-color {
       margin-left: 8px;
     }
-		&-title {
-			margin-right: 8px;
-		}
+    &-title {
+      margin-right: 8px;
+    }
     &-fz {
       width: 80px;
     }

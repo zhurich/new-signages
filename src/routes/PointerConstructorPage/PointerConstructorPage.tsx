@@ -1,4 +1,6 @@
-import React, { useState, FC, useEffect, useMemo } from "react";
+import React, { useState, FC, useEffect, useMemo, useRef } from "react";
+import { Stage, Layer, Image } from "react-konva";
+import useImage from "use-image";
 import { useNavigate } from "react-router-dom";
 import block from "bem-cn";
 import { MainLayout, Container } from "../../components";
@@ -21,7 +23,21 @@ export const PointerConstructorPage: FC = () => {
   const [isObjectAddModalOpen, setIsObjectAddModalOpen] = useState(false);
   const { pointerKey } = useSelector((state: any) => state.pointerConstructor);
   const [objects, setObjects] = useState<any>([]);
+  const [visualOpacity, setVisualOpacity] = useState<number>(0.5);
   console.log(objects);
+  const [background] = useImage(
+    "https://sun9-22.userapi.com/impg/6ZPmdIOdM73zGG8qhJrhncfHgVFV8F_WN1ygAA/-qMWB11xL8g.jpg?size=1920x785&quality=96&sign=3c6a748c936f977b5f348170a14b7140&type=album"
+  );
+
+  const stageRef: any = useRef(null);
+  const [exportedImage, setExportedImage] = useState("");
+  const [canvasImage] = useImage(exportedImage);
+  const handleExport = () => {
+    if (stageRef.current) {
+      const dataURL = stageRef?.current?.toDataURL();
+      setExportedImage(dataURL);
+    }
+  };
 
   return (
     <MainLayout title="Указатели">
@@ -42,6 +58,7 @@ export const PointerConstructorPage: FC = () => {
           <div className={b("constructor")}>
             <div className={b("constructor-canvas")}>
               <PreliminaryPointer
+                stageRef={stageRef}
                 objects={objects}
                 setObjects={setObjects}
                 {...pointerParams}
@@ -192,6 +209,45 @@ export const PointerConstructorPage: FC = () => {
                     )}
                   </div>
                 ))}
+                <h1 className={b("legend-title")}>Визуализация</h1>
+                <div className={b("visual-buttons")}>
+                  <Button onClick={handleExport}>Визуализировать</Button>
+                  <input
+                    type="range"
+                    min="0"
+                    step="0.01"
+                    max="1"
+                    value={visualOpacity}
+                    onChange={(e) =>
+                      setVisualOpacity(Number(e?.target?.value))
+                    }
+                  />
+                </div>
+                <div className="vis">
+                  <Stage width={816} height={334}>
+                    <Layer>
+                      <Image image={background} width={816} height={334} />
+                      {/* <Image
+                        image={overlay}
+                        x={50}
+                        y={50}
+                        width={100}
+                        height={100}
+                      /> */}
+                      {canvasImage && (
+                        <Image
+                          draggable
+                          image={canvasImage}
+                          x={295}
+													y={10}
+                          opacity={visualOpacity}
+                          width={pointerParams?.width / 2}
+                          height={pointerParams?.height / 2}
+                        />
+                      )}
+                    </Layer>
+                  </Stage>
+                </div>
               </div>
             </div>
           </div>
