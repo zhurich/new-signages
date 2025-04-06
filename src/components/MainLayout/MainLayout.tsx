@@ -39,7 +39,7 @@ export const MainLayout: FC<Props> = ({
       <Header
       // handleClickLogo={() => navigate(Path.MainPage)}
       />
-      <div className={b("page-buttons")}>
+      {/* <div className={b("page-buttons")}>
         <button
           className={b("page-button")}
           onClick={() => navigate("/registry")}
@@ -58,7 +58,7 @@ export const MainLayout: FC<Props> = ({
         >
           Разметка
         </button>
-      </div>
+      </div> */}
       <main className={b("main")}>
         <div className={b("content")}>{children}</div>
       </main>

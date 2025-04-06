@@ -4,21 +4,12 @@ import "./Header.scss";
 export const Header: FC = () => {
   return (
     <header className="header">
-      <div className="header__logo">РОСДОРЗНАК</div>
-      <nav className="header__nav">
-        <a href="/support" className="header__link">
-          Поддержка
+      <div className="header__logo">AliveSigns Engineer Конструктор</div>
+      <div className="header__nav">
+        <a href="/exit" className="header__link">
+          Выйти из конструктора
         </a>
-        <a href="/profile" className="header__link">
-          Профиль
-        </a>
-        <a href="/license" className="header__link">
-          Лицензия
-        </a>
-        <a href="/logout" className="header__link">
-          Выйти
-        </a>
-      </nav>
+      </div>
     </header>
   );
 };

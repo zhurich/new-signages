@@ -14,10 +14,29 @@
     display: flex;
     flex-direction: row;
     margin-top: 24px;
-  }
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
 
-  &__constructor-canvas {
-    width: 1000px;
+    &-canvas,
+    &-visualize,
+    &-params,
+    &-legend {
+      border: 2px solid #ccc;
+      border-radius: 12px;
+      background-color: white;
+      min-height: 200px;
+      padding: 24px;
+    }
+
+    &-canvas,
+    &-params {
+      flex: 0 0 calc(55% - 10px);
+    }
+    &-visualize,
+    &-legend {
+      flex: 0 0 calc(45% - 10px);
+    }
   }
 
   &__visual-buttons {
@@ -28,6 +47,9 @@
   &__param-title {
     margin-right: 8px;
     font-size: 24px;
+    font-weight: bold;
+    width: 5em;
+    white-space: nowrap;
   }
 
   &__params-title,
@@ -39,10 +61,15 @@
     margin-top: 24px;
   }
 
+  &__param-items-row {
+    display: flex;
+  }
+
   &__param-item {
     margin-top: 12px;
     display: flex;
     align-items: center;
+    width: 25em;
   }
 
   &__param-value {

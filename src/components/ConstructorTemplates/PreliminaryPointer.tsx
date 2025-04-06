@@ -63,11 +63,11 @@ export const PreliminaryPointer = (pointerParams: any) => {
   return (
     <div>
       {/* Stage для рисования объектов */}
-      <Stage width={width*1.25} height={height*1.25} ref={stageRef}>
+      <Stage width={width*1.05} height={height*1.1} ref={stageRef}>
         <Layer>
           <Rect
-            x={50}
-            y={20}
+            x={10}
+            y={10}
 						height={height}
             width={width}
             fill={bgColor}
