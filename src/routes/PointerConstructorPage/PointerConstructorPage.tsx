@@ -9,6 +9,12 @@ import { ObjectAddModal } from "../../components/ObjectsModal/ObjectAddModal";
 import { Button } from "../../components";
 import { ReactComponent as Trash } from "../../assets/icons/trash.svg";
 import { ReactComponent as Plus } from "../../assets/icons/plus.svg";
+import {
+  PICTOGRAMS,
+  ROAD_ARROWS,
+  ROAD_STRIPS,
+  TRAFFIC_SIGNS,
+} from "./constants";
 import "./PointerConstructorPage.scss";
 import { useSelector } from "react-redux";
 
@@ -39,6 +45,11 @@ export const PointerConstructorPage: FC = () => {
       setExportedImage(dataURL);
     }
   };
+
+  const arrows = Array(9).fill(null); // Заготовка для массива стрелок
+  const stripes = Array(3).fill(null); // Заготовка для массива полос
+  const distances = ["5 км", "500 м"]; // Заготовка для массива расстояний
+  const signs = Array(9).fill(null); // Заготовка для массива знаков
 
   return (
     <MainLayout title="Указатели">
@@ -80,9 +91,9 @@ export const PointerConstructorPage: FC = () => {
                 setObjects={setObjects}
                 {...pointerParams}
               />
-              <Button onClick={() => setIsObjectAddModalOpen(true)}>
+              {/* <Button onClick={() => setIsObjectAddModalOpen(true)}>
                 Добавить объект
-              </Button>
+              </Button> */}
             </div>
             <div className={b("constructor-visualize")}>
               <h1 className={b("legend-title")}>Визуализация</h1>
@@ -213,14 +224,111 @@ export const PointerConstructorPage: FC = () => {
                     </div>
                   </div>
                   <div className={b("param-item")}>
-                    <div className={b("param-title")}>Округление углов:</div>
+                    <div className={b("param-title")}>Скругление углов:</div>
                   </div>
                 </div>
               </div>
               <br />
               <br />
               <h1 className={b("params-title")}>Вставка</h1>
-              
+              <div className={b("insert")}>
+                <div className={b("insert-actions")}>
+                  <Button onClick={() => setIsObjectAddModalOpen(true)}>
+                    Добавить объект
+                  </Button>
+                  <Button>Фильтры</Button>
+                </div>
+
+                <div className={b("insert-section")}>
+                  <div className={b("insert-title")}>Стрелки</div>
+                  <div className={b("insert-grid")}>
+                    {ROAD_ARROWS.map((arrow) => (
+                      <button
+                        key={arrow.id}
+                        className={b("insert-item")}
+                        title={arrow.title}
+                      >
+                        <img
+                          src={arrow.image}
+                          alt={arrow.title}
+                          className={b("insert-item-image")}
+                        />
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                <div className={b("insert-section")}>
+                  <div className={b("insert-title")}>Полосы</div>
+                  <div className={b("insert-grid")}>
+                    {ROAD_STRIPS.map((arrow) => (
+                      <button
+                        key={arrow.id}
+                        className={b("insert-item")}
+                        title={arrow.title}
+                      >
+                        <img
+                          src={arrow.image}
+                          alt={arrow.title}
+                          className={b("insert-item-image")}
+                        />
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                <div className={b("insert-section")}>
+                  <div className={b("insert-title")}>Километраж</div>
+                  <div className={b("insert-grid")}>
+                    {distances.map((distance, index) => (
+                      <button
+                        key={`distance-${index}`}
+                        className={b("insert-item", { outlined: true })}
+                      >
+                        {distance}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                <div className={b("insert-section")}>
+                  <div className={b("insert-title")}>Дорожные знаки</div>
+                  <div className={b("insert-grid")}>
+                    {TRAFFIC_SIGNS.map((arrow) => (
+                      <button
+                        key={arrow.id}
+                        className={b("insert-item")}
+                        title={arrow.title}
+                      >
+                        <img
+                          src={arrow.image}
+                          alt={arrow.title}
+                          className={b("insert-item-image")}
+                        />
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                <div className={b("insert-section")}>
+                  <div className={b("insert-title")}>Пиктограммы</div>
+                  <div className={b("insert-grid")}>
+                    {PICTOGRAMS.map((arrow) => (
+                      <button
+                        key={arrow.id}
+                        className={b("insert-item")}
+                        title={arrow.title}
+                      >
+                        <img
+                          src={arrow.image}
+                          alt={arrow.title}
+                          className={b("insert-item-image")}
+                        />
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              </div>
             </div>
             <div className={b("constructor-legend")}>
               <h1 className={b("legend-title")}>Элементы на указателе</h1>
@@ -249,7 +357,9 @@ export const PointerConstructorPage: FC = () => {
                       />
                     </div>
                   ) : (
-                    <div className={b("legend-item-title")}>{signItem?.title}</div>
+                    <div className={b("legend-item-title")}>
+                      {signItem?.title}
+                    </div>
                   )}
                   {(signItem?.type === "text" ||
                     signItem?.type === "arrow-s" ||
