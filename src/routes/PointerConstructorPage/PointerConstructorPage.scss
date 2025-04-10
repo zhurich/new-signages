@@ -1,22 +1,80 @@
 .pointer-constructor {
   &__content {
     display: flex;
-    flex-direction: column;
+    gap: 24px;
   }
 
-  &__buttons-wrapper {
+  &__sidebar {
     display: flex;
+    flex-direction: column;
     gap: 16px;
-    align-self: end;
+    padding: 16px;
+    border-right: 2px solid #e0e0e0;
+    min-width: 100px;
+    align-items: center;
+  }
+
+  &__sidebar-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+  }
+
+  &__sidebar-button {
+    width: 100%;
+    aspect-ratio: 1.4;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    background: white;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &:hover {
+      border-color: #0072c6;
+    }
+
+    &_active {
+      border-color: #0072c6;
+      background-color: rgba(0, 114, 198, 0.1);
+    }
+  }
+
+  &__sidebar-add {
+    width: 100%;
+    aspect-ratio: 1.4;
+    border: 2px dashed #e0e0e0;
+    border-radius: 8px;
+    background: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+
+    > svg {
+      width: 24px;
+      height: 24px;
+      fill: #999;
+    }
+
+    &:hover {
+      border-color: #0072c6;
+      > svg {
+        fill: #0072c6;
+      }
+    }
   }
 
   &__constructor {
     display: flex;
     flex-direction: row;
-    margin-top: 24px;
     flex-wrap: wrap;
     gap: 20px;
     justify-content: center;
+    flex: 1;
+    padding-top: 24px;
+    padding-right: 24px;
 
     &-canvas,
     &-visualize,
@@ -57,8 +115,49 @@
     margin-bottom: 12px;
   }
 
+  &__legend-item-title {
+    font-size: 24px;
+    font-weight: bold;
+    white-space: nowrap;
+  }
+
+  &__legend-item-title,
+  &__legend-item-value {
+    width: 16em;
+  }
+
   &__legend {
     margin-top: 24px;
+
+    &-value-color {
+      margin-left: 8px;
+      margin-right: 8px;
+    }
+    &-value-title {
+      margin-right: 8px;
+    }
+  }
+
+  &__legend-item {
+    margin-top: 12px;
+    display: flex;
+    align-items: center;
+    width: 40em;
+  }
+
+  &__legend-value {
+    display: flex;
+    align-items: center;
+    font-size: 24px;
+    > input[type="text"] {
+      height: 40px;
+      border-radius: 16px;
+      padding-left: 12px;
+      border: 1px solid black;
+    }
+    &-text {
+      width: 16em;
+    }
   }
 
   &__param-items-row {

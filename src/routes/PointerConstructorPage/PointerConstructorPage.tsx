@@ -8,6 +8,7 @@ import { PreliminaryPointer } from "../../components/ConstructorTemplates/Prelim
 import { ObjectAddModal } from "../../components/ObjectsModal/ObjectAddModal";
 import { Button } from "../../components";
 import { ReactComponent as Trash } from "../../assets/icons/trash.svg";
+import { ReactComponent as Plus } from "../../assets/icons/plus.svg";
 import "./PointerConstructorPage.scss";
 import { useSelector } from "react-redux";
 
@@ -47,14 +48,21 @@ export const PointerConstructorPage: FC = () => {
         objects={objects}
         setObjects={setObjects}
       />
-      <Container className={b()}>
+      <div className={b()}>
         <div className={b("content")}>
-          {/* <div className={b("buttons-wrapper")}>
-            <Button onClick={() => navigate("/pointers")}>
-              К выбору знака
-            </Button>
-            <Button>Сохранить</Button>
-          </div> */}
+          <div className={b("sidebar")}>
+            <div className={b("sidebar-buttons")}>
+              <button className={b("sidebar-button")} />
+              <button className={b("sidebar-button")} />
+              <button className={b("sidebar-button")} />
+              <button className={b("sidebar-button")} />
+              <button className={b("sidebar-button")} />
+              <button className={b("sidebar-button")} />
+            </div>
+            <button className={b("sidebar-add")}>
+              <Plus />
+            </button>
+          </div>
           <div className={b("constructor")}>
             <div className={b("constructor-canvas")}>
               <h1 className={b("params-title")}>Проектирование указателя</h1>
@@ -209,15 +217,19 @@ export const PointerConstructorPage: FC = () => {
                   </div>
                 </div>
               </div>
+              <br />
+              <br />
+              <h1 className={b("params-title")}>Вставка</h1>
+              
             </div>
             <div className={b("constructor-legend")}>
-              <h1 className={b("legend-title")}>Легенда</h1>
+              <h1 className={b("legend-title")}>Элементы на указателе</h1>
               {objects?.map((signItem: any) => (
-                <div className={b("param-item")}>
+                <div className={b("legend-item")}>
                   {signItem?.type === "text" ? (
-                    <div className={b("param-value")}>
+                    <div className={b("legend-value")}>
                       <input
-                        className={b("param-value-text")}
+                        className={b("legend-value-text")}
                         type="text"
                         value={signItem?.text}
                         onChange={(e) => {
@@ -237,21 +249,8 @@ export const PointerConstructorPage: FC = () => {
                       />
                     </div>
                   ) : (
-                    <div className={b("param-title")}>{signItem?.title}</div>
+                    <div className={b("legend-item-title")}>{signItem?.title}</div>
                   )}
-                  <Trash
-                    className={b("param-delete")}
-                    onClick={() => {
-                      const elementIndex = objects.findIndex(
-                        (item: any) => item?.id === signItem?.id
-                      );
-                      const data = [
-                        ...objects?.slice(0, elementIndex),
-                        ...objects?.slice(elementIndex + 1),
-                      ];
-                      setObjects(data);
-                    }}
-                  />
                   {(signItem?.type === "text" ||
                     signItem?.type === "arrow-s" ||
                     signItem?.type === "arrow-m" ||
@@ -259,7 +258,7 @@ export const PointerConstructorPage: FC = () => {
                     signItem?.type === "arrow-curved-right") && (
                     <div className={b("param-value")}>
                       <input
-                        className={b("param-value-color")}
+                        className={b("legend-value-color")}
                         type="color"
                         value={signItem?.color}
                         onChange={(e) => {
@@ -281,7 +280,7 @@ export const PointerConstructorPage: FC = () => {
                   )}
                   {signItem?.type === "text" && (
                     <div className={b("param-value")}>
-                      <div className={b("param-value-title")}>FZ:</div>
+                      <div className={b("legend-value-title")}>FZ:</div>
                       <input
                         className={b("param-value-fz")}
                         type="text"
@@ -303,12 +302,25 @@ export const PointerConstructorPage: FC = () => {
                       />
                     </div>
                   )}
+                  <Trash
+                    className={b("param-delete")}
+                    onClick={() => {
+                      const elementIndex = objects.findIndex(
+                        (item: any) => item?.id === signItem?.id
+                      );
+                      const data = [
+                        ...objects?.slice(0, elementIndex),
+                        ...objects?.slice(elementIndex + 1),
+                      ];
+                      setObjects(data);
+                    }}
+                  />
                 </div>
               ))}
             </div>
           </div>
         </div>
-      </Container>
+      </div>
     </MainLayout>
   );
 };
