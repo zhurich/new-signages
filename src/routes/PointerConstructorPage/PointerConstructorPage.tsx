@@ -1,5 +1,6 @@
 import React, { useState, FC, useEffect, useMemo, useRef } from "react";
 import { Stage, Layer, Image, Rect, Group } from "react-konva";
+import { v4 as uuid } from "uuid";
 import useImage from "use-image";
 import { useNavigate } from "react-router-dom";
 import block from "bem-cn";
@@ -13,19 +14,25 @@ import {
   PICTOGRAMS,
   ROAD_ARROWS,
   ROAD_STRIPS,
+  SVG_ROAD_ARROWS,
   TRAFFIC_SIGNS,
 } from "./constants";
 import "./PointerConstructorPage.scss";
 import { useSelector } from "react-redux";
+import { title } from "process";
 
 const b = block("pointer-constructor");
 
 export const PointerConstructorPage: FC = () => {
   const navigate = useNavigate();
   const [pointerParams, setPointerParams] = useState({
-    height: 300,
-    width: 500,
+    height: 450,
+    width: 750,
     bgColor: "white",
+  });
+  const [visualParams, setVisualParams] = useState({
+    height: 428,
+    width: 615,
   });
   const [isObjectAddModalOpen, setIsObjectAddModalOpen] = useState(false);
   const { pointerKey } = useSelector((state: any) => state.pointerConstructor);
@@ -109,16 +116,16 @@ export const PointerConstructorPage: FC = () => {
                 />
               </div>
               <div className="vis">
-                <Stage width={557} height={388}>
+                <Stage width={visualParams?.width + 20} height={visualParams?.height + 20}>
                   <Layer>
                     <Group
                       x={10}
                       y={10}
-                      clipWidth={537}
-                      clipHeight={368}
+                      clipWidth={visualParams?.width}
+                      clipHeight={visualParams?.height}
                       clipFunc={(ctx) => {
-                        const width = 537;
-                        const height = 368;
+                        const width = visualParams?.width;
+                        const height = visualParams?.height;
                         const radius = 10;
 
                         ctx.beginPath();
@@ -141,8 +148,8 @@ export const PointerConstructorPage: FC = () => {
                     >
                       <Image
                         image={background}
-                        width={537}
-                        height={368}
+                        width={visualParams?.width}
+                        height={visualParams?.height}
                         x={0}
                         y={0}
                       />
@@ -150,8 +157,8 @@ export const PointerConstructorPage: FC = () => {
                     <Rect
                       x={10}
                       y={10}
-                      width={537}
-                      height={368}
+                      width={visualParams?.width}
+                      height={visualParams?.height}
                       stroke="black"
                       strokeWidth={3}
                       cornerRadius={10}
@@ -244,14 +251,28 @@ export const PointerConstructorPage: FC = () => {
                   <div className={b("insert-grid")}>
                     {ROAD_ARROWS.map((arrow) => (
                       <button
-                        key={arrow.id}
+                        key={arrow.key}
                         className={b("insert-item")}
                         title={arrow.title}
+                        onClick={() => {
+                          setObjects((state: any) => [
+                            ...state,
+                            { 
+                              id: `${arrow.id}-${uuid()}`,
+                              type: "arrow",
+                              title: arrow.title,
+                              data: SVG_ROAD_ARROWS[arrow.key],
+                              color: "black",
+                              x: 300,
+                              y: 200,
+                             },
+                          ]);
+                        }}
                       >
-                        <img
-                          src={arrow.image}
-                          alt={arrow.title}
+                        <arrow.image 
                           className={b("insert-item-image")}
+                          width={32}
+                          height={32}
                         />
                       </button>
                     ))}

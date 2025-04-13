@@ -28,7 +28,8 @@ export const PreliminaryPointer = (pointerParams: any) => {
       } else if (
         obj.type === "arrow-s" ||
         obj.type === "arrow-m" ||
-        obj.type === "arrow-l"
+        obj.type === "arrow-l" ||
+        obj.type === "arrow"
       ) {
         return (
           // <Path
