@@ -1,4 +1,5 @@
-import React, { useState, FC, useEffect, useMemo } from "react";
+import React, { useState, FC, useEffect, useMemo, useRef } from "react";
+import Konva from "konva";
 import block from "bem-cn";
 import { Stage, Layer, Text, Rect, Path } from "react-konva";
 import { ResizableArrowPath } from "./ResizableArrowPath";
@@ -8,6 +9,16 @@ const b = block("pointer-constructor");
 export const PreliminaryPointer = (pointerParams: any) => {
   const { height, width, bgColor, objects, setObjects, stageRef } =
     pointerParams;
+  const [selectedId, setSelectedId] = useState<string | null>(null);
+
+  const handleStageClick = (e: Konva.KonvaEventObject<MouseEvent>) => {
+    const stage = e.target.getStage();
+    const clickedOnEmpty = e.target === stage || e.target === stage?.findOne('Rect');
+    
+    if (clickedOnEmpty) {
+      setSelectedId(null);
+    }
+  };
 
   const renderObjects = () => {
     return objects.map((obj: any) => {
@@ -32,21 +43,16 @@ export const PreliminaryPointer = (pointerParams: any) => {
         obj.type === "arrow"
       ) {
         return (
-          // <Path
-          //   key={obj.id}
-          //   data={obj.data}
-          //   fill={obj.color}
-          //   scale={{ x: 0.05, y: 0.05 }}
-          //   x={obj.x}
-          //   y={obj.y}
-          //   draggable
-          //   rotation={180}
-          // />
           <ResizableArrowPath
             key={obj.id}
             obj={obj}
-            pathData={obj.data} // вертикальная стрелка
-            onDelete={() => alert("Удалено!")}
+            pathData={obj.data}
+            onDelete={() => {
+              setObjects((prev: any) => prev.filter((item: any) => item.id !== obj.id));
+            }}
+            onDeselect={() => setSelectedId(null)}
+            onSelect={() => setSelectedId(obj.id)}
+            isSelected={selectedId === obj.id}
           />
         );
       } else if (obj.type === "arrow-curved-right") {
@@ -72,7 +78,13 @@ export const PreliminaryPointer = (pointerParams: any) => {
   return (
     <div>
       {/* Stage для рисования объектов */}
-      <Stage width={width * 1.05} height={height * 1.1} ref={stageRef}>
+      <Stage
+        ref={stageRef}
+        width={width * 1.05}
+        height={height * 1.1}
+        onClick={handleStageClick}
+        onTap={handleStageClick}
+      >
         <Layer>
           <Rect
             x={10}
