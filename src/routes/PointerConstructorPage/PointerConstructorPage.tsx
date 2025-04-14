@@ -7,6 +7,7 @@ import block from "bem-cn";
 import { MainLayout, Container } from "../../components";
 import { PreliminaryPointer } from "../../components/ConstructorTemplates/PreliminaryPointer";
 import { ObjectAddModal } from "../../components/ObjectsModal/ObjectAddModal";
+import { AddressAssistantModal } from "../../components/AddressAssistantModal/AddressAssistantModal";
 import { Button } from "../../components";
 import { ReactComponent as Trash } from "../../assets/icons/trash.svg";
 import { ReactComponent as Plus } from "../../assets/icons/plus.svg";
@@ -70,6 +71,7 @@ export const PointerConstructorPage: FC = () => {
   const distances = ["5 км", "500 м"]; // Заготовка для массива расстояний
 
   const [isFilmTypeOpen, setIsFilmTypeOpen] = useState(false);
+  const [isAddressAssistantOpen, setIsAddressAssistantOpen] = useState(false);
 
   const handleFilmTypeSelect = (filmType: string) => {
     setPointerParams((prev) => ({
@@ -86,6 +88,14 @@ export const PointerConstructorPage: FC = () => {
         setOpen={setIsObjectAddModalOpen}
         objects={objects}
         setObjects={setObjects}
+      />
+      <AddressAssistantModal
+        isOpen={isAddressAssistantOpen}
+        setOpen={setIsAddressAssistantOpen}
+        onSubmit={(data) => {
+          // Здесь будет логика создания указателя на основе данных из ассистента
+          console.log(data);
+        }}
       />
       <div className={b()}>
         <div className={b("content")}>
@@ -145,6 +155,7 @@ export const PointerConstructorPage: FC = () => {
                       width: 30,
                       height: 30,
                     }}
+                    onClick={() => setIsAddressAssistantOpen(true)}
                   >
                     По адресу
                   </Button>
@@ -186,6 +197,7 @@ export const PointerConstructorPage: FC = () => {
               <div className={b("visual-buttons")}>
                 <Button onClick={handleExport}>Визуализировать</Button>
                 <input
+                  style={{ marginLeft: "16px" }}
                   type="range"
                   min="0"
                   step="0.01"
@@ -249,7 +261,7 @@ export const PointerConstructorPage: FC = () => {
                       <Image
                         draggable
                         image={canvasImage}
-                        x={295}
+                        x={150}
                         y={10}
                         opacity={visualOpacity}
                         width={pointerParams?.width / 2}
