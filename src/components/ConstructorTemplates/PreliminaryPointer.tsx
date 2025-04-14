@@ -7,7 +7,7 @@ import { ResizableArrowPath } from "./ResizableArrowPath";
 const b = block("pointer-constructor");
 
 export const PreliminaryPointer = (pointerParams: any) => {
-  const { height, width, bgColor, objects, setObjects, stageRef } =
+  const { height, width, bgColor, objects, setObjects, stageRef, borderRadius } =
     pointerParams;
   const [selectedId, setSelectedId] = useState<string | null>(null);
 
@@ -81,7 +81,7 @@ export const PreliminaryPointer = (pointerParams: any) => {
       <Stage
         ref={stageRef}
         width={width * 1.05}
-        height={height * 1.1}
+        height={height * 1.05}
         onClick={handleStageClick}
         onTap={handleStageClick}
       >
@@ -94,7 +94,7 @@ export const PreliminaryPointer = (pointerParams: any) => {
             fill={bgColor}
             stroke="black"
             strokeWidth={3}
-            cornerRadius={10}
+            cornerRadius={borderRadius}
           />
           {renderObjects()}
         </Layer>

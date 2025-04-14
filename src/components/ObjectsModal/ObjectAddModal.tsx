@@ -17,63 +17,42 @@ export const ObjectAddModal = ({
   const [selectedObjItem, setSelectedObjItem] = useState<any>();
 
   const objectsList = [
-    {
-      type: "arrow-l",
-      key: "arrow-l",
-      title: "Стрелка длинная",
-      // icon: preliminaryIcon,
-    },
-    {
-      type: "arrow-m",
-      key: "arrow-m",
-      title: "Стрелка средняя",
-      // icon: directionSignIcon,
-    },
-    {
-      type: "arrow-s",
-      key: "arrow-short",
-      title: "Стрелка короткая",
-      // icon: directionPointerIcon,
-    },
-    {
-      type: "arrow-curved-right",
-      key: "arrow-curved-right",
-      title: "Стрелка изогнутая вправо",
-      // icon: objectNameIcon,
-    },
-    {
-      type: "arrow",
-      key: "arrow-curved-right-long",
-      title: "Стрелка изогнутая вправо длинная",
-      disabled: true,
-      // icon: distancePointerIcon,
-    },
+    // {
+    //   type: "arrow-l",
+    //   key: "arrow-l",
+    //   title: "Стрелка длинная",
+    //   // icon: preliminaryIcon,
+    // },
+    // {
+    //   type: "arrow-m",
+    //   key: "arrow-m",
+    //   title: "Стрелка средняя",
+    //   // icon: directionSignIcon,
+    // },
+    // {
+    //   type: "arrow-s",
+    //   key: "arrow-short",
+    //   title: "Стрелка короткая",
+    //   // icon: directionPointerIcon,
+    // },
+    // {
+    //   type: "arrow-curved-right",
+    //   key: "arrow-curved-right",
+    //   title: "Стрелка изогнутая вправо",
+    //   // icon: objectNameIcon,
+    // },
+    // {
+    //   type: "arrow",
+    //   key: "arrow-curved-right-long",
+    //   title: "Стрелка изогнутая вправо длинная",
+    //   disabled: true,
+    //   // icon: distancePointerIcon,
+    // },
     {
       type: "text",
       key: "text-black",
       title: "Текст черный",
       // icon: kmSignIcon
-    },
-    {
-      type: "pic",
-      key: "pic-1",
-      title: "Пиктограмма 1",
-      disabled: true,
-      //  icon: routeNumberIcon
-    },
-    {
-      type: "pic",
-      key: "pic-2",
-      title: "Пиктограмма 2",
-      disabled: true,
-      // icon: routeNumberIcon
-    },
-    {
-      type: "pic",
-      key: "pic-3",
-      title: "Пиктограмма 3",
-      disabled: true,
-      //  icon: routeNumberIcon
     },
   ];
 
@@ -89,7 +68,7 @@ export const ObjectAddModal = ({
           <div
             className={b("object-item", {
               active: selectedObjItem?.key === obj?.key,
-              disabled: obj?.disabled,
+              // disabled: obj?.disabled,
             })}
             onClick={() => setSelectedObjItem(obj)}
           >
@@ -112,7 +91,7 @@ export const ObjectAddModal = ({
                 ...newObject,
                 text: "Улица Берзарина",
                 color: "black",
-                fontSize: 32,
+                fontSize: 40,
                 x: 100,
                 y: 100,
               };

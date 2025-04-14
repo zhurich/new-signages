@@ -10,6 +10,12 @@ import { ObjectAddModal } from "../../components/ObjectsModal/ObjectAddModal";
 import { Button } from "../../components";
 import { ReactComponent as Trash } from "../../assets/icons/trash.svg";
 import { ReactComponent as Plus } from "../../assets/icons/plus.svg";
+import RightArrowIcon from "../../assets/icons/right-arrow.png";
+import SaveIcon from "../../assets/icons/save.png";
+import UploadIcon from "../../assets/icons/upload.png";
+import AiIcon from "../../assets/icons/ai.png";
+import HistoryLeftIcon from "../../assets/icons/history-left.png";
+import HistoryRightIcon from "../../assets/icons/history-right.png";
 import {
   PICTOGRAMS,
   ROAD_ARROWS,
@@ -23,12 +29,20 @@ import { title } from "process";
 
 const b = block("pointer-constructor");
 
+const FILM_TYPES = [
+  { id: "type-a", title: "Тип А" },
+  { id: "type-b", title: "Тип Б" },
+  { id: "type-c", title: "Тип В" },
+];
+
 export const PointerConstructorPage: FC = () => {
   const navigate = useNavigate();
   const [pointerParams, setPointerParams] = useState({
     height: 450,
-    width: 750,
+    width: 700,
     bgColor: "white",
+    borderRadius: 15,
+    filmType: FILM_TYPES[0].id,
   });
   const [visualParams, setVisualParams] = useState({
     height: 428,
@@ -53,10 +67,17 @@ export const PointerConstructorPage: FC = () => {
     }
   };
 
-  const arrows = Array(9).fill(null); // Заготовка для массива стрелок
-  const stripes = Array(3).fill(null); // Заготовка для массива полос
   const distances = ["5 км", "500 м"]; // Заготовка для массива расстояний
-  const signs = Array(9).fill(null); // Заготовка для массива знаков
+
+  const [isFilmTypeOpen, setIsFilmTypeOpen] = useState(false);
+
+  const handleFilmTypeSelect = (filmType: string) => {
+    setPointerParams((prev) => ({
+      ...prev,
+      filmType,
+    }));
+    setIsFilmTypeOpen(false);
+  };
 
   return (
     <MainLayout title="Указатели">
@@ -83,13 +104,71 @@ export const PointerConstructorPage: FC = () => {
           </div>
           <div className={b("constructor")}>
             <div className={b("constructor-canvas")}>
-              <h1 className={b("params-title")}>Проектирование указателя</h1>
+              <div className={b("params-wrapper")}>
+                <h1 className={b("params-title")}>Проектирование указателя</h1>
+                <Button
+                  endIcon={{
+                    type: "image",
+                    content: RightArrowIcon,
+                    width: 45,
+                    height: 30,
+                  }}
+                >
+                  Оформить заказ
+                </Button>
+              </div>
 
               <div className={b("buttons-wrapper")}>
-                <Button onClick={() => navigate("/pointers")}>
-                  К выбору знака
-                </Button>
-                <Button>Сохранить</Button>
+                <div className={b("history-buttons")}>
+                  <button className={b("history-button")}>
+                    <img
+                      src={HistoryLeftIcon}
+                      className={b("history-button-image")}
+                      width={40}
+                      height={40}
+                    />
+                  </button>
+                  <button className={b("history-button")}>
+                    <img
+                      src={HistoryRightIcon}
+                      className={b("history-button-image")}
+                      width={40}
+                      height={40}
+                    />
+                  </button>
+                </div>
+                <div className={b("action-buttons")}>
+                  <Button
+                    endIcon={{
+                      type: "image",
+                      content: AiIcon,
+                      width: 30,
+                      height: 30,
+                    }}
+                  >
+                    По адресу
+                  </Button>
+                  <Button
+                    endIcon={{
+                      type: "image",
+                      content: SaveIcon,
+                      width: 30,
+                      height: 30,
+                    }}
+                  >
+                    Сохранить
+                  </Button>
+                  <Button
+                    endIcon={{
+                      type: "image",
+                      content: UploadIcon,
+                      width: 30,
+                      height: 30,
+                    }}
+                  >
+                    Выгрузить
+                  </Button>
+                </div>
               </div>
 
               <PreliminaryPointer
@@ -116,7 +195,10 @@ export const PointerConstructorPage: FC = () => {
                 />
               </div>
               <div className="vis">
-                <Stage width={visualParams?.width + 20} height={visualParams?.height + 20}>
+                <Stage
+                  width={visualParams?.width + 20}
+                  height={visualParams?.height + 20}
+                >
                   <Layer>
                     <Group
                       x={10}
@@ -211,7 +293,35 @@ export const PointerConstructorPage: FC = () => {
                     </div>
                   </div>
                   <div className={b("param-item")}>
-                    <div className={b("param-title")}>Тип пленки:</div>
+                    <div className={b("param-title")} style={{ width: "10em" }}>
+                      Тип пленки:
+                    </div>
+                    <div className={b("param-value")}>
+                      <div className={b("film-type-selector")}>
+                        <Button
+                          onClick={() => setIsFilmTypeOpen(!isFilmTypeOpen)}
+                        >
+                          {FILM_TYPES.find(
+                            (type) => type.id === pointerParams.filmType
+                          )?.title || "Выберите тип"}
+                        </Button>
+                        {isFilmTypeOpen && (
+                          <div className={b("film-type-dropdown")}>
+                            {FILM_TYPES.map((type) => (
+                              <button
+                                key={type.id}
+                                className={b("film-type-option", {
+                                  selected: type.id === pointerParams.filmType,
+                                })}
+                                onClick={() => handleFilmTypeSelect(type.id)}
+                              >
+                                {type.title}
+                              </button>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    </div>
                   </div>
                 </div>
                 <div className={b("param-items-row")}>
@@ -231,7 +341,23 @@ export const PointerConstructorPage: FC = () => {
                     </div>
                   </div>
                   <div className={b("param-item")}>
-                    <div className={b("param-title")}>Скругление углов:</div>
+                    <div className={b("param-title")} style={{ width: "10em" }}>
+                      Скругление углов:
+                    </div>
+                    <div className={b("param-value")}>
+                      <input
+                        className={b("param-value-size")}
+                        type="text"
+                        value={pointerParams?.borderRadius}
+                        onChange={(e) => {
+                          console.log(e?.target?.value);
+                          setPointerParams((state: any) => ({
+                            ...state,
+                            borderRadius: e?.target?.value,
+                          }));
+                        }}
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
@@ -243,7 +369,6 @@ export const PointerConstructorPage: FC = () => {
                   <Button onClick={() => setIsObjectAddModalOpen(true)}>
                     Добавить объект
                   </Button>
-                  <Button>Фильтры</Button>
                 </div>
 
                 <div className={b("insert-section")}>
@@ -257,7 +382,7 @@ export const PointerConstructorPage: FC = () => {
                         onClick={() => {
                           setObjects((state: any) => [
                             ...state,
-                            { 
+                            {
                               id: `${arrow.id}-${uuid()}`,
                               type: "arrow",
                               title: arrow.title,
@@ -265,11 +390,11 @@ export const PointerConstructorPage: FC = () => {
                               color: "black",
                               x: 300,
                               y: 200,
-                             },
+                            },
                           ]);
                         }}
                       >
-                        <arrow.image 
+                        <arrow.image
                           className={b("insert-item-image")}
                           width={32}
                           height={32}

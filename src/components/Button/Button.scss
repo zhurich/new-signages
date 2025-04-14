@@ -1,19 +1,42 @@
 .button {
-  padding: 0 20px;
-  height: 40px;
-  font-size: 20px;
-  background-color: #0072c6;
-  color: white;
-  border: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 16px;
+  border: 2px solid black;
+  border-radius: 20px;
   cursor: pointer;
+  font-size: 24px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  gap: 8px;
+  background: #ffffff;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
 
   &:hover {
-    background-color: #005a9e;
-    transition: all 0.3s linear;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
   }
 
-	&[disabled] {
-    cursor: no-drop;
-		background-color: #bcc5c7;
+  &:active {
+    transform: translateY(1px);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  &__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &_end {
+      margin-left: 4px;
+    }
+  }
+
+  span {
+    font-weight: 500;
   }
 }
