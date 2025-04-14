@@ -20,6 +20,18 @@ export const PreliminaryPointer = (pointerParams: any) => {
     }
   };
 
+  const handleTransform = (newProps: any) => {
+    const elementIndex = objects.findIndex((item: any) => item.id === newProps.id);
+    if (elementIndex !== -1) {
+      const updatedObjects = [
+        ...objects.slice(0, elementIndex),
+        newProps,
+        ...objects.slice(elementIndex + 1),
+      ];
+      setObjects(updatedObjects);
+    }
+  };
+
   const renderObjects = () => {
     return objects.map((obj: any) => {
       if (obj.type === "text") {
@@ -53,6 +65,7 @@ export const PreliminaryPointer = (pointerParams: any) => {
             onDeselect={() => setSelectedId(null)}
             onSelect={() => setSelectedId(obj.id)}
             isSelected={selectedId === obj.id}
+            onTransform={handleTransform}
           />
         );
       } else if (obj.type === "arrow-curved-right") {

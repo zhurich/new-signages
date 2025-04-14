@@ -9,6 +9,7 @@ interface ResizableArrowPathProps {
   onDeselect?: () => void;
   isSelected?: boolean;
   onSelect?: () => void;
+  onTransform?: (newProps: any) => void;
 }
 
 export const ResizableArrowPath: React.FC<ResizableArrowPathProps> = ({
@@ -18,6 +19,7 @@ export const ResizableArrowPath: React.FC<ResizableArrowPathProps> = ({
   onDeselect,
   isSelected = false,
   onSelect,
+  onTransform,
 }) => {
   const shapeRef = useRef<Konva.Path>(null);
   const trRef = useRef<Konva.Transformer>(null);
@@ -53,6 +55,24 @@ export const ResizableArrowPath: React.FC<ResizableArrowPathProps> = ({
     onDelete();
   };
 
+  const handleTransformEnd = () => {
+    if (shapeRef.current && onTransform) {
+      const node = shapeRef.current;
+      const scaleX = node.scaleX();
+      const scaleY = node.scaleY();
+
+      // Сохраняем новые значения масштаба
+      onTransform({
+        ...obj,
+        scaleX: scaleX,
+        scaleY: scaleY,
+        rotation: node.rotation(),
+        x: node.x(),
+        y: node.y(),
+      });
+    }
+  };
+
   const rect = shapeRef.current?.getClientRect();
 
   return (
@@ -61,16 +81,29 @@ export const ResizableArrowPath: React.FC<ResizableArrowPathProps> = ({
         draggable
         onClick={handleClick}
         onTap={handleTap}
+        onDragEnd={() => {
+          if (shapeRef.current && onTransform) {
+            const node = shapeRef.current;
+            onTransform({
+              ...obj,
+              x: node.x(),
+              y: node.y(),
+            });
+          }
+        }}
       >
         <Path
           ref={shapeRef}
           data={pathData}
           fill={obj?.color}
-          scale={{ x: 0.05, y: 0.05 }}
+          scale={{ 
+            x: obj?.scaleX || 0.05, 
+            y: obj?.scaleY || 0.05 
+          }}
           x={obj?.x}
           y={obj?.y}
+          rotation={obj?.rotation || 180}
           draggable
-          rotation={180}
         />
 
         {/* Кнопка удаления */}
@@ -99,6 +132,7 @@ export const ResizableArrowPath: React.FC<ResizableArrowPathProps> = ({
             "bottom-right",
           ]}
           boundBoxFunc={(oldBox, newBox) => newBox}
+          onTransformEnd={handleTransformEnd}
         />
       )}
     </>
