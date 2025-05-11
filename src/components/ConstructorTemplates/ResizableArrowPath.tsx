@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Group, Path, Transformer, Circle, Text } from "react-konva";
 import Konva from "konva";
 
@@ -23,6 +23,7 @@ export const ResizableArrowPath: React.FC<ResizableArrowPathProps> = ({
 }) => {
   const shapeRef = useRef<Konva.Path>(null);
   const trRef = useRef<Konva.Transformer>(null);
+  const [rect, setRect] = useState<{ x: number; y: number; width: number; height: number } | null>(null);
 
   useEffect(() => {
     if (isSelected && shapeRef.current && trRef.current) {
@@ -30,6 +31,12 @@ export const ResizableArrowPath: React.FC<ResizableArrowPathProps> = ({
       trRef.current.getLayer()?.batchDraw();
     }
   }, [isSelected]);
+
+  useEffect(() => {
+    if (shapeRef.current) {
+      setRect(shapeRef.current.getClientRect());
+    }
+  }, [pathData]);
 
   const handleClick = (e: Konva.KonvaEventObject<MouseEvent>) => {
     e.cancelBubble = true;
@@ -61,7 +68,8 @@ export const ResizableArrowPath: React.FC<ResizableArrowPathProps> = ({
       const scaleX = node.scaleX();
       const scaleY = node.scaleY();
 
-      // Сохраняем новые значения масштаба
+      setRect(node.getClientRect());
+
       onTransform({
         ...obj,
         scaleX: scaleX,
@@ -73,17 +81,21 @@ export const ResizableArrowPath: React.FC<ResizableArrowPathProps> = ({
     }
   };
 
-  const rect = shapeRef.current?.getClientRect();
-
   return (
     <>
       <Group
         draggable
         onClick={handleClick}
         onTap={handleTap}
+        onDragMove={() => {
+          if (shapeRef.current) {
+            setRect(shapeRef.current.getClientRect());
+          }
+        }}
         onDragEnd={() => {
           if (shapeRef.current && onTransform) {
             const node = shapeRef.current;
+            setRect(node.getClientRect());
             onTransform({
               ...obj,
               x: node.x(),

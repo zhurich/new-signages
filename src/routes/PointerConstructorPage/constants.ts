@@ -125,59 +125,341 @@ export const ROAD_ARROWS = [
 ];
 
 export const PICTOGRAMS = [
-  { id: 1, title: "Стрелка прямая короткая", image: pictogram1 },
-  { id: 2, title: "Стрелка прямая средняя", image: pictogram2 },
-  { id: 3, title: "Стрелка прямая длинная", image: pictogram3 },
-  { id: 4, title: "Стрелка изогнутая вправо", image: pictogram4 },
-  { id: 5, title: "Стрелка изогнутая влево", image: pictogram5 },
-  { id: 6, title: "Стрелка поворот вправо", image: pictogram6 },
-  { id: 7, title: "Стрелка поворот влево", image: pictogram7 },
-  { id: 8, title: "Стрелка разворот вправо", image: pictogram8 },
-  { id: 9, title: "Стрелка разворот влево", image: pictogram9 },
-  { id: 10, title: "Стрелка разворот влево", image: pictogram10 },
-  { id: 11, title: "Стрелка разворот влево", image: pictogram11 },
-  { id: 12, title: "Стрелка разворот влево", image: pictogram12 },
-  { id: 13, title: "Стрелка разворот влево", image: pictogram13 },
-  { id: 14, title: "Стрелка разворот влево", image: pictogram14 },
-  { id: 15, title: "Стрелка разворот влево", image: pictogram15 },
-  { id: 16, title: "Стрелка разворот влево", image: pictogram16 },
+  {
+    id: 1,
+    title: "Станция метро (черная)",
+    image: pictogram1,
+    imgUrl:
+      "https://raw.githubusercontent.com/zhurich/signages-test/57c133673ca80beef806bfe9269d1af3315b1fd5/pictograms/Pictogram1.svg",
+  },
+  {
+    id: 2,
+    title: "Станция метро (красная)",
+    image: pictogram2,
+    imgUrl:
+      "https://raw.githubusercontent.com/zhurich/signages-test/57c133673ca80beef806bfe9269d1af3315b1fd5/pictograms/Pictogram2.svg",
+  },
+  {
+    id: 3,
+    title: "Магистраль",
+    image: pictogram3,
+    imgUrl:
+      "https://raw.githubusercontent.com/zhurich/signages-test/57c133673ca80beef806bfe9269d1af3315b1fd5/pictograms/Pictogram3.svg",
+  },
+  {
+    id: 4,
+    title: "Аэропорт (1)",
+    image: pictogram4,
+    imgUrl:
+      "https://raw.githubusercontent.com/zhurich/signages-test/57c133673ca80beef806bfe9269d1af3315b1fd5/pictograms/Pictogram4.svg",
+  },
+  {
+    id: 5,
+    title: "Аэропорт (2)",
+    image: pictogram5,
+    imgUrl:
+      "https://raw.githubusercontent.com/zhurich/signages-test/57c133673ca80beef806bfe9269d1af3315b1fd5/pictograms/Pictogram5.svg",
+  },
+  {
+    id: 6,
+    title: "Автомобиль",
+    image: pictogram6,
+    imgUrl:
+      "https://raw.githubusercontent.com/zhurich/signages-test/57c133673ca80beef806bfe9269d1af3315b1fd5/pictograms/Pictogram6.svg",
+  },
+  {
+    id: 7,
+    title: "Автобус",
+    image: pictogram7,
+    imgUrl:
+      "https://raw.githubusercontent.com/zhurich/signages-test/57c133673ca80beef806bfe9269d1af3315b1fd5/pictograms/Pictogram7.svg",
+  },
+  {
+    id: 8,
+    title: "Грузовик",
+    image: pictogram8,
+    imgUrl:
+      "https://raw.githubusercontent.com/zhurich/signages-test/57c133673ca80beef806bfe9269d1af3315b1fd5/pictograms/Pictogram8.svg",
+  },
+  {
+    id: 9,
+    title: "Микроавтобус",
+    image: pictogram9,
+    imgUrl:
+      "https://raw.githubusercontent.com/zhurich/signages-test/57c133673ca80beef806bfe9269d1af3315b1fd5/pictograms/Pictogram9.svg",
+  },
+  {
+    id: 10,
+    title: "Мотоцикл",
+    image: pictogram10,
+    imgUrl:
+      "https://raw.githubusercontent.com/zhurich/signages-test/57c133673ca80beef806bfe9269d1af3315b1fd5/pictograms/Pictogram10.svg",
+  },
+  {
+    id: 11,
+    title: "Велосипед",
+    image: pictogram11,
+    imgUrl:
+      "https://raw.githubusercontent.com/zhurich/signages-test/57c133673ca80beef806bfe9269d1af3315b1fd5/pictograms/Pictogram11.svg",
+  },
+  {
+    id: 12,
+    title: "Мост",
+    image: pictogram12,
+    imgUrl:
+      "https://raw.githubusercontent.com/zhurich/signages-test/57c133673ca80beef806bfe9269d1af3315b1fd5/pictograms/Pictogram12.svg",
+  },
+  {
+    id: 13,
+    title: "Поезд",
+    image: pictogram13,
+    imgUrl:
+      "https://raw.githubusercontent.com/zhurich/signages-test/57c133673ca80beef806bfe9269d1af3315b1fd5/pictograms/Pictogram13.svg",
+  },
+  {
+    id: 14,
+    title: "Музей",
+    image: pictogram14,
+    imgUrl:
+      "https://raw.githubusercontent.com/zhurich/signages-test/57c133673ca80beef806bfe9269d1af3315b1fd5/pictograms/Pictogram14.svg",
+  },
+  {
+    id: 15,
+    title: "Трактор",
+    image: pictogram15,
+    imgUrl:
+      "https://raw.githubusercontent.com/zhurich/signages-test/57c133673ca80beef806bfe9269d1af3315b1fd5/pictograms/Pictogram15.svg",
+  },
+  {
+    id: 16,
+    title: "Парк",
+    image: pictogram16,
+    imgUrl:
+      "https://raw.githubusercontent.com/zhurich/signages-test/57c133673ca80beef806bfe9269d1af3315b1fd5/pictograms/Pictogram16.svg",
+  },
 ];
 
 export const ROAD_STRIPS = [
-  { id: 1, title: "Стрелка прямая короткая", image: roadstrip1 },
-  { id: 2, title: "Стрелка прямая средняя", image: roadstrip2 },
-  { id: 3, title: "Стрелка прямая длинная", image: roadstrip3 },
-  { id: 4, title: "Стрелка изогнутая вправо", image: roadstrip4 },
-  { id: 5, title: "Стрелка изогнутая влево", image: roadstrip5 },
-  { id: 6, title: "Стрелка поворот вправо", image: roadstrip6 },
-  { id: 7, title: "Стрелка поворот влево", image: roadstrip7 },
-  { id: 8, title: "Стрелка разворот вправо", image: roadstrip8 },
-  { id: 9, title: "Стрелка разворот влево", image: roadstrip9 },
-  { id: 10, title: "Стрелка разворот влево", image: roadstrip10 },
-  { id: 11, title: "Стрелка разворот влево", image: roadstrip11 },
-  { id: 12, title: "Стрелка разворот влево", image: roadstrip12 },
-  { id: 13, title: "Стрелка разворот влево", image: roadstrip13 },
+  {
+    id: 1,
+    title: "Полоса и короткая стрелка прямо",
+    image: roadstrip1,
+    imgUrl:
+      "https://raw.githubusercontent.com/zhurich/signages-test/57c133673ca80beef806bfe9269d1af3315b1fd5/road-strips/RoadStrip1.svg",
+  },
+  {
+    id: 2,
+    title: "Полоса и длинная стрелка прямо",
+    image: roadstrip2,
+    imgUrl:
+      "https://raw.githubusercontent.com/zhurich/signages-test/57c133673ca80beef806bfe9269d1af3315b1fd5/road-strips/RoadStrip2.svg",
+  },
+  {
+    id: 3,
+    title: "Полоса и стрелка налево",
+    image: roadstrip3,
+    imgUrl:
+      "https://raw.githubusercontent.com/zhurich/signages-test/57c133673ca80beef806bfe9269d1af3315b1fd5/road-strips/RoadStrip3.svg",
+  },
+  {
+    id: 4,
+    title: "Полоса и стрелка направо",
+    image: roadstrip4,
+    imgUrl:
+      "https://raw.githubusercontent.com/zhurich/signages-test/57c133673ca80beef806bfe9269d1af3315b1fd5/road-strips/RoadStrip4.svg",
+  },
+  {
+    id: 5,
+    title: "Пунктирная полоса",
+    image: roadstrip5,
+    imgUrl:
+      "https://raw.githubusercontent.com/zhurich/signages-test/57c133673ca80beef806bfe9269d1af3315b1fd5/road-strips/RoadStrip5.svg",
+  },
+  {
+    id: 6,
+    title: "Прерывистая полоса",
+    image: roadstrip6,
+    imgUrl:
+      "https://raw.githubusercontent.com/zhurich/signages-test/57c133673ca80beef806bfe9269d1af3315b1fd5/road-strips/RoadStrip6.svg",
+  },
+  {
+    id: 7,
+    title: "Сплошная полоса",
+    image: roadstrip7,
+    imgUrl:
+      "https://raw.githubusercontent.com/zhurich/signages-test/57c133673ca80beef806bfe9269d1af3315b1fd5/road-strips/RoadStrip7.svg",
+  },
+  {
+    id: 8,
+    title: "Сплошная и прерывистая полоса",
+    image: roadstrip8,
+    imgUrl:
+      "https://raw.githubusercontent.com/zhurich/signages-test/57c133673ca80beef806bfe9269d1af3315b1fd5/road-strips/RoadStrip8.svg",
+  },
+  {
+    id: 9,
+    title: "Стрелка разворот влево",
+    image: roadstrip9,
+    imgUrl:
+      "https://raw.githubusercontent.com/zhurich/signages-test/57c133673ca80beef806bfe9269d1af3315b1fd5/road-strips/RoadStrip9.svg",
+  },
+  {
+    id: 10,
+    title: "Двойная сплошная полоса",
+    image: roadstrip10,
+    imgUrl:
+      "https://raw.githubusercontent.com/zhurich/signages-test/57c133673ca80beef806bfe9269d1af3315b1fd5/road-strips/RoadStrip10.svg",
+  },
+  {
+    id: 11,
+    title: "Пунктирная синия полоса",
+    image: roadstrip11,
+    imgUrl:
+      "https://raw.githubusercontent.com/zhurich/signages-test/57c133673ca80beef806bfe9269d1af3315b1fd5/road-strips/RoadStrip11.svg",
+  },
+  {
+    id: 12,
+    title: "Двойная сплошная жёлтая полоса",
+    image: roadstrip12,
+    imgUrl:
+      "https://raw.githubusercontent.com/zhurich/signages-test/57c133673ca80beef806bfe9269d1af3315b1fd5/road-strips/RoadStrip12.svg",
+  },
+  {
+    id: 13,
+    title: "Выделенная полоса",
+    image: roadstrip13,
+    imgUrl:
+      "https://raw.githubusercontent.com/zhurich/signages-test/57c133673ca80beef806bfe9269d1af3315b1fd5/road-strips/RoadStrip13.svg",
+  },
 ];
 
 export const TRAFFIC_SIGNS = [
-  { id: 1, title: "Стрелка прямая короткая", image: trafficsign1 },
-  { id: 2, title: "Стрелка прямая средняя", image: trafficsign2 },
-  { id: 3, title: "Стрелка прямая длинная", image: trafficsign3 },
-  { id: 4, title: "Стрелка изогнутая вправо", image: trafficsign4 },
-  { id: 5, title: "Стрелка изогнутая влево", image: trafficsign5 },
-  { id: 6, title: "Стрелка поворот вправо", image: trafficsign6 },
-  { id: 7, title: "Стрелка поворот влево", image: trafficsign7 },
-  { id: 8, title: "Стрелка разворот вправо", image: trafficsign8 },
-  { id: 9, title: "Стрелка разворот влево", image: trafficsign9 },
-  { id: 10, title: "Стрелка разворот влево", image: trafficsign10 },
-  { id: 11, title: "Стрелка разворот влево", image: trafficsign11 },
-  { id: 12, title: "Стрелка разворот влево", image: trafficsign12 },
-  { id: 13, title: "Стрелка разворот влево", image: trafficsign13 },
-  { id: 14, title: "Стрелка разворот влево", image: trafficsign14 },
-  { id: 15, title: "Стрелка разворот влево", image: trafficsign15 },
-  { id: 16, title: "Стрелка разворот влево", image: trafficsign16 },
-  { id: 17, title: "Стрелка разворот влево", image: trafficsign17 },
-  { id: 18, title: "Стрелка разворот влево", image: trafficsign18 },
+  {
+    id: 1,
+    title: "Кирпич",
+    image: trafficsign1,
+    imgUrl:
+      "https://raw.githubusercontent.com/zhurich/signages-test/57c133673ca80beef806bfe9269d1af3315b1fd5/traffic-signs/TrafficSign1.svg",
+  },
+  {
+    id: 2,
+    title: "Движение запрещено",
+    image: trafficsign2,
+    imgUrl:
+      "https://raw.githubusercontent.com/zhurich/signages-test/57c133673ca80beef806bfe9269d1af3315b1fd5/traffic-signs/TrafficSign2.svg",
+  },
+  {
+    id: 3,
+    title: "Тоннель",
+    image: trafficsign3,
+    imgUrl:
+      "https://raw.githubusercontent.com/zhurich/signages-test/57c133673ca80beef806bfe9269d1af3315b1fd5/traffic-signs/TrafficSign3.svg",
+  },
+  {
+    id: 4,
+    title: "Дорожные работы",
+    image: trafficsign4,
+    imgUrl:
+      "https://raw.githubusercontent.com/zhurich/signages-test/57c133673ca80beef806bfe9269d1af3315b1fd5/traffic-signs/TrafficSign4.svg",
+  },
+  {
+    id: 5,
+    title: "Выезд на набережную",
+    image: trafficsign5,
+    imgUrl:
+      "https://raw.githubusercontent.com/zhurich/signages-test/57c133673ca80beef806bfe9269d1af3315b1fd5/traffic-signs/TrafficSign5.svg",
+  },
+  {
+    id: 6,
+    title: "Круговое движение",
+    image: trafficsign6,
+    imgUrl:
+      "https://raw.githubusercontent.com/zhurich/signages-test/57c133673ca80beef806bfe9269d1af3315b1fd5/traffic-signs/TrafficSign6.svg",
+  },
+  {
+    id: 7,
+    title: "Ограничение скорости 5 км/ч",
+    image: trafficsign7,
+    imgUrl:
+      "https://raw.githubusercontent.com/zhurich/signages-test/57c133673ca80beef806bfe9269d1af3315b1fd5/traffic-signs/TrafficSign7.svg",
+  },
+  {
+    id: 8,
+    title: "Ограничение скорости 10 км/ч",
+    image: trafficsign8,
+    imgUrl:
+      "https://raw.githubusercontent.com/zhurich/signages-test/57c133673ca80beef806bfe9269d1af3315b1fd5/traffic-signs/TrafficSign8.svg",
+  },
+  {
+    id: 9,
+    title: "Ограничение скорости 20 км/ч",
+    image: trafficsign9,
+    imgUrl:
+      "https://raw.githubusercontent.com/zhurich/signages-test/57c133673ca80beef806bfe9269d1af3315b1fd5/traffic-signs/TrafficSign9.svg",
+  },
+  {
+    id: 10,
+    title: "Ограничение скорости 30 км/ч",
+    image: trafficsign10,
+    imgUrl:
+      "https://raw.githubusercontent.com/zhurich/signages-test/57c133673ca80beef806bfe9269d1af3315b1fd5/traffic-signs/TrafficSign10.svg",
+  },
+  {
+    id: 11,
+    title: "Ограничение скорости 40 км/ч",
+    image: trafficsign11,
+    imgUrl:
+      "https://raw.githubusercontent.com/zhurich/signages-test/57c133673ca80beef806bfe9269d1af3315b1fd5/traffic-signs/TrafficSign11.svg",
+  },
+  {
+    id: 12,
+    title: "Ограничение скорости 50 км/ч",
+    image: trafficsign12,
+    imgUrl:
+      "https://raw.githubusercontent.com/zhurich/signages-test/57c133673ca80beef806bfe9269d1af3315b1fd5/traffic-signs/TrafficSign12.svg",
+  },
+  {
+    id: 13,
+    title: "Ограничение скорости 60 км/ч",
+    image: trafficsign13,
+    imgUrl:
+      "https://raw.githubusercontent.com/zhurich/signages-test/57c133673ca80beef806bfe9269d1af3315b1fd5/traffic-signs/TrafficSign13.svg",
+  },
+  {
+    id: 14,
+    title: "Ограничение скорости 70 км/ч",
+    image: trafficsign14,
+    imgUrl:
+      "https://raw.githubusercontent.com/zhurich/signages-test/57c133673ca80beef806bfe9269d1af3315b1fd5/traffic-signs/TrafficSign14.svg",
+  },
+  {
+    id: 15,
+    title: "Ограничение скорости 80 км/ч",
+    image: trafficsign15,
+    imgUrl:
+      "https://raw.githubusercontent.com/zhurich/signages-test/57c133673ca80beef806bfe9269d1af3315b1fd5/traffic-signs/TrafficSign15.svg",
+  },
+  {
+    id: 16,
+    title: "Ограничение скорости 90 км/ч",
+    image: trafficsign16,
+    imgUrl:
+      "https://raw.githubusercontent.com/zhurich/signages-test/57c133673ca80beef806bfe9269d1af3315b1fd5/traffic-signs/TrafficSign16.svg",
+  },
+  {
+    id: 17,
+    title: "Ограничение скорости 100 км/ч",
+    image: trafficsign17,
+    imgUrl:
+      "https://raw.githubusercontent.com/zhurich/signages-test/57c133673ca80beef806bfe9269d1af3315b1fd5/traffic-signs/TrafficSign17.svg",
+  },
+  {
+    id: 18,
+    title: "Ограничение скорости 110 км/ч",
+    image: trafficsign18,
+    imgUrl:
+      "https://raw.githubusercontent.com/zhurich/signages-test/57c133673ca80beef806bfe9269d1af3315b1fd5/traffic-signs/TrafficSign18.svg",
+  },
 ];
 
 export const SVG_ROAD_ARROWS: Record<string, string> = {

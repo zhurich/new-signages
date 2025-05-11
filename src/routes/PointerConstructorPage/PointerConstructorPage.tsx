@@ -381,6 +381,18 @@ export const PointerConstructorPage: FC = () => {
                   <Button onClick={() => setIsObjectAddModalOpen(true)}>
                     Добавить объект
                   </Button>
+                  {/* <button
+                    className={b("insert-item")}
+                    onClick={() => {
+                      setObjects((state: any) => [
+                        ...state,
+                        {
+                          id: `${uuid()}`,
+                          type: "road-strip-3",
+                        },
+                      ]);
+                    }}
+                  ></button> */}
                 </div>
 
                 <div className={b("insert-section")}>
@@ -419,25 +431,57 @@ export const PointerConstructorPage: FC = () => {
                 <div className={b("insert-section")}>
                   <div className={b("insert-title")}>Полосы</div>
                   <div className={b("insert-grid")}>
-                    {ROAD_STRIPS.map((arrow) => (
+                    {ROAD_STRIPS.map((strip) => (
                       <button
-                        key={arrow.id}
                         className={b("insert-item")}
-                        title={arrow.title}
+                        title={strip.title}
+                        onClick={() => {
+                          setObjects((state: any) => [
+                            ...state,
+                            {
+                              id: `${strip.id}-${uuid()}`,
+                              type: "strip",
+                              title: strip.title,
+                              imgUrl: strip.imgUrl,
+                              color: "black",
+                              x: 300,
+                              y: 200,
+                            },
+                          ]);
+                        }}
                       >
                         <img
-                          src={arrow.image}
-                          alt={arrow.title}
+                          src={strip.image}
+                          alt={strip.title}
                           className={b("insert-item-image")}
                         />
                       </button>
                     ))}
                   </div>
                 </div>
-
                 <div className={b("insert-section")}>
-                  <div className={b("insert-title")}>Километраж</div>
+                  <div className={b("insert-title")}>Текст</div>
                   <div className={b("insert-grid")}>
+                    <button
+                      key={`text`}
+                      className={b("insert-item", { outlined: true })}
+                      onClick={() => {
+                        setObjects((state: any) => [
+                          ...state,
+                          {
+                            id: `text-${uuid()}`,
+                            type: "text",
+                            text: "Улица Берзарина",
+                            color: "black",
+                            fontSize: 40,
+                            x: 100,
+                            y: 100,
+                          },
+                        ]);
+                      }}
+                    >
+                      Текст
+                    </button>
                     {distances.map((distance, index) => (
                       <button
                         key={`distance-${index}`}
@@ -452,15 +496,28 @@ export const PointerConstructorPage: FC = () => {
                 <div className={b("insert-section")}>
                   <div className={b("insert-title")}>Дорожные знаки</div>
                   <div className={b("insert-grid")}>
-                    {TRAFFIC_SIGNS.map((arrow) => (
+                    {TRAFFIC_SIGNS.map((sign) => (
                       <button
-                        key={arrow.id}
                         className={b("insert-item")}
-                        title={arrow.title}
+                        title={sign.title}
+                        onClick={() => {
+                          setObjects((state: any) => [
+                            ...state,
+                            {
+                              id: `${sign.id}-${uuid()}`,
+                              type: "strip",
+                              title: sign.title,
+                              imgUrl: sign.imgUrl,
+                              color: "black",
+                              x: 300,
+                              y: 200,
+                            },
+                          ]);
+                        }}
                       >
                         <img
-                          src={arrow.image}
-                          alt={arrow.title}
+                          src={sign.image}
+                          alt={sign.title}
                           className={b("insert-item-image")}
                         />
                       </button>
@@ -471,15 +528,28 @@ export const PointerConstructorPage: FC = () => {
                 <div className={b("insert-section")}>
                   <div className={b("insert-title")}>Пиктограммы</div>
                   <div className={b("insert-grid")}>
-                    {PICTOGRAMS.map((arrow) => (
+                    {PICTOGRAMS.map((pictogram) => (
                       <button
-                        key={arrow.id}
                         className={b("insert-item")}
-                        title={arrow.title}
+                        title={pictogram.title}
+                        onClick={() => {
+                          setObjects((state: any) => [
+                            ...state,
+                            {
+                              id: `${pictogram.id}-${uuid()}`,
+                              type: "strip",
+                              title: pictogram.title,
+                              imgUrl: pictogram.imgUrl,
+                              color: "black",
+                              x: 300,
+                              y: 200,
+                            },
+                          ]);
+                        }}
                       >
                         <img
-                          src={arrow.image}
-                          alt={arrow.title}
+                          src={pictogram.image}
+                          alt={pictogram.title}
                           className={b("insert-item-image")}
                         />
                       </button>
