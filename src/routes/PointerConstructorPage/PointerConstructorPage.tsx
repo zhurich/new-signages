@@ -26,7 +26,6 @@ import {
 } from "./constants";
 import "./PointerConstructorPage.scss";
 import { useSelector } from "react-redux";
-import { title } from "process";
 
 const b = block("pointer-constructor");
 
@@ -39,7 +38,7 @@ const FILM_TYPES = [
 export const PointerConstructorPage: FC = () => {
   const navigate = useNavigate();
   const [pointerParams, setPointerParams] = useState({
-    height: 450,
+    height: 500,
     width: 700,
     bgColor: "white",
     borderRadius: 15,
@@ -65,6 +64,23 @@ export const PointerConstructorPage: FC = () => {
     if (stageRef.current) {
       const dataURL = stageRef?.current?.toDataURL();
       setExportedImage(dataURL);
+    }
+  };
+
+  const handleSave = () => {
+    if (stageRef.current) {
+      try {
+        const dataURL = stageRef.current.toDataURL();
+        const link = document.createElement('a');
+        link.download = `pointer-${new Date().getTime()}.png`;
+        link.href = dataURL;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      } catch (error) {
+        console.error("Ошибка при сохранении изображения:", error);
+        alert("Не удалось сохранить изображение. Проверьте, что все изображения загружены с правильными CORS-заголовками.");
+      }
     }
   };
 
@@ -166,6 +182,7 @@ export const PointerConstructorPage: FC = () => {
                       width: 30,
                       height: 30,
                     }}
+                    onClick={handleSave}
                   >
                     Сохранить
                   </Button>
@@ -176,6 +193,7 @@ export const PointerConstructorPage: FC = () => {
                       width: 30,
                       height: 30,
                     }}
+                    onClick={handleSave}
                   >
                     Выгрузить
                   </Button>
@@ -378,9 +396,9 @@ export const PointerConstructorPage: FC = () => {
               <h1 className={b("params-title")}>Вставка</h1>
               <div className={b("insert")}>
                 <div className={b("insert-actions")}>
-                  <Button onClick={() => setIsObjectAddModalOpen(true)}>
+                  {/* <Button onClick={() => setIsObjectAddModalOpen(true)}>
                     Добавить объект
-                  </Button>
+                  </Button> */}
                   {/* <button
                     className={b("insert-item")}
                     onClick={() => {
@@ -486,6 +504,20 @@ export const PointerConstructorPage: FC = () => {
                       <button
                         key={`distance-${index}`}
                         className={b("insert-item", { outlined: true })}
+                        onClick={() => {
+                          setObjects((state: any) => [
+                            ...state,
+                            {
+                              id: `text-${uuid()}`,
+                              type: "text",
+                              text: distance,
+                              color: "black",
+                              fontSize: 40,
+                              x: 100,
+                              y: 100,
+                            },
+                          ]);
+                        }}
                       >
                         {distance}
                       </button>

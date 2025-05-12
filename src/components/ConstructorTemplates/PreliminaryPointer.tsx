@@ -112,13 +112,10 @@ export const PreliminaryPointer = (pointerParams: any) => {
                 prev.filter((item: any) => item.id !== obj.id)
               );
             }}
-            // obj={{
-            //   x: 100,
-            //   y: 100,
-            //   scaleX: 1,
-            //   scaleY: 1,
-            //   rotation: 0,
-            // }}
+            obj={{
+              x: obj.x,
+              y: obj.y,
+            }}
             onDeselect={() => setSelectedId(null)}
             onSelect={() => setSelectedId(obj.id)}
             isSelected={selectedId === obj.id}
