@@ -71,7 +71,7 @@ export const PointerConstructorPage: FC = () => {
     if (stageRef.current) {
       try {
         const dataURL = stageRef.current.toDataURL();
-        const link = document.createElement('a');
+        const link = document.createElement("a");
         link.download = `pointer-${new Date().getTime()}.png`;
         link.href = dataURL;
         document.body.appendChild(link);
@@ -79,7 +79,9 @@ export const PointerConstructorPage: FC = () => {
         document.body.removeChild(link);
       } catch (error) {
         console.error("Ошибка при сохранении изображения:", error);
-        alert("Не удалось сохранить изображение. Проверьте, что все изображения загружены с правильными CORS-заголовками.");
+        alert(
+          "Не удалось сохранить изображение. Проверьте, что все изображения загружены с правильными CORS-заголовками."
+        );
       }
     }
   };
@@ -96,6 +98,63 @@ export const PointerConstructorPage: FC = () => {
     }));
     setIsFilmTypeOpen(false);
   };
+
+  const [history, setHistory] = useState<any[]>([]);
+  const [currentHistoryIndex, setCurrentHistoryIndex] = useState(-1);
+  const isNavigatingHistory = useRef(false);
+
+  // Функция для сохранения состояния в историю
+  const saveToHistory = (newObjects: any[]) => {
+    if (isNavigatingHistory.current) {
+      isNavigatingHistory.current = false;
+      return;
+    }
+
+    const newHistory = history.slice(0, currentHistoryIndex + 1);
+    newHistory.push(JSON.stringify(newObjects));
+    setHistory(newHistory);
+    setCurrentHistoryIndex(newHistory.length - 1);
+  };
+
+  // Функция для отмены действия
+  const handleUndo = () => {
+    if (currentHistoryIndex > 0) {
+      isNavigatingHistory.current = true;
+      const newIndex = currentHistoryIndex - 1;
+      setCurrentHistoryIndex(newIndex);
+      setObjects(JSON.parse(history[newIndex]));
+    }
+  };
+
+  // Функция для возврата действия
+  const handleRedo = () => {
+    if (currentHistoryIndex < history.length - 1) {
+      isNavigatingHistory.current = true;
+      const newIndex = currentHistoryIndex + 1;
+      setCurrentHistoryIndex(newIndex);
+      setObjects(JSON.parse(history[newIndex]));
+    }
+  };
+
+  // Обновляем историю при изменении объектов
+  useEffect(() => {
+    if (objects.length > 0) {
+      saveToHistory(objects);
+    }
+  }, [objects]);
+
+  // Инициализация истории при первом рендере
+  useEffect(() => {
+    if (objects.length > 0 && history.length === 0) {
+      saveToHistory(objects);
+    }
+  }, []);
+
+  // Добавляем отладочный вывод
+  useEffect(() => {
+    console.log("History length:", history.length);
+    console.log("Current index:", currentHistoryIndex);
+  }, [history, currentHistoryIndex]);
 
   return (
     <MainLayout title="Указатели">
@@ -146,20 +205,44 @@ export const PointerConstructorPage: FC = () => {
 
               <div className={b("buttons-wrapper")}>
                 <div className={b("history-buttons")}>
-                  <button className={b("history-button")}>
+                  <button
+                    className={b("history-button")}
+                    onClick={handleUndo}
+                    disabled={currentHistoryIndex <= 0}
+                  >
                     <img
                       src={HistoryLeftIcon}
                       className={b("history-button-image")}
                       width={40}
                       height={40}
+                      alt="Назад"
+                      style={{
+                        filter:
+                          currentHistoryIndex <= 0
+                            ? "grayscale(1) opacity(0.4)"
+                            : "none",
+                        transition: "filter 0.2s",
+                      }}
                     />
                   </button>
-                  <button className={b("history-button")}>
+                  <button
+                    className={b("history-button")}
+                    onClick={handleRedo}
+                    disabled={currentHistoryIndex >= history.length - 1}
+                  >
                     <img
                       src={HistoryRightIcon}
                       className={b("history-button-image")}
                       width={40}
                       height={40}
+                      alt="Вперед"
+                      style={{
+                        filter:
+                          currentHistoryIndex >= history.length - 1
+                            ? "grayscale(1) opacity(0.4)"
+                            : "none",
+                        transition: "filter 0.2s",
+                      }}
                     />
                   </button>
                 </div>

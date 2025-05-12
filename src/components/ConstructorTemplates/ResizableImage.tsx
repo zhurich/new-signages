@@ -60,8 +60,6 @@ export const ResizableImage: React.FC<ResizableImageProps> = ({
     };
   }, [imageUrl]);
 
-  console.log(image);
-
   const handleClick = (e: Konva.KonvaEventObject<MouseEvent>) => {
     e.cancelBubble = true;
     if (onSelect) {
